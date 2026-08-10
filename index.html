@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codenames Cards</title>
+
+  <link rel="stylesheet" type="text/css" href="./css/style.css" media="screen" />
+
+
+</head>
+
+<body>
+
+<div class="container">
+
+  <h1>Codenames Cards</h1>
+
+  <div class="search-box">
+    <input
+      type="search"
+      id="searchInput"
+      placeholder="Search for a word..."
+      autocomplete="off"
+      autofocus
+    >
+  </div>
+
+  <div id="resultCount"></div>
+
+  <div id="results"></div>
+
+  <div class="instructions">
+    Search the front, back, deck, or position of a card.
+    <br>
+    Examples: Pitch, King, Tooth...
+  </div>
+
+</div>
+
+<script>
+
+  /*
+   * ============================================
+   * DECK 1
+   * ============================================
+   *
+   * These are placeholders.
+   *
+   * Replace the front/back values below with your
+   * actual Deck 1 data when you are ready.
+   */
+
+  const deck1 = Array.from({ length: 100 }, (_, i) => ({
+    deck: "Deck 1",
+    position: `A${i + 1}`,
+    front: `F_CARD_${i + 1}`,
+    back: `B_CARD_${i + 1}`
+  }));
+
+
+  /*
+   * ============================================
+   * DECK 2
+   * ============================================
+   */
+
+  const deck2 = [
+    { position: "1", front: "PITCH", back: "KING" },
+    { position: "2", front: "BOND", back: "PAN" },
+    { position: "3", front: "APPLE", back: "POLE" },
+    { position: "4", front: "OIL", back: "SUPERHERO" },
+    { position: "5", front: "COOK", back: "REVOLUTION" },
+    { position: "6", front: "FLY", back: "PIT" },
+    { position: "7", front: "CAST", back: "GAS" },
+    { position: "8", front: "BEAR", back: "GLASS" },
+    { position: "9", front: "PIN", back: "WASHINGTON" },
+    { position: "10", front: "MINE", back: "TURKEY" },
+    { position: "11", front: "CHECK", back: "QUEEN" },
+    { position: "12", front: "BAR", back: "FILE" },
+    { position: "13", front: "COLD", back: "CRICKET" },
+    { position: "14", front: "HOLLYWOOD", back: "WELL" },
+    { position: "15", front: "SCREEN", back: "FAIR" },
+    { position: "16", front: "PLAY", back: "TOOTH" },
+    { position: "17", front: "MARBLE", back: "STAFF" },
+    { position: "18", front: "DINOSAUR", back: "BILL" },
+    { position: "19", front: "CAT", back: "SHOT" },
+    { position: "20", front: "GAME", back: "WASHER" },
+    { position: "21", front: "LIFE", back: "LAP" },
+    { position: "22", front: "LUCK", back: "AMAZON" },
+    { position: "23", front: "HOOK", back: "SPACE" },
+    { position: "24", front: "PARK", back: "FIGURE" },
+    { position: "25", front: "BAT", back: "MASS" },
+    { position: "26", front: "BOLT", back: "CHINA" },
+    { position: "27", front: "GREECE", back: "SQUARE" },
+    { position: "28", front: "DECK", back: "BUFFALO" },
+    { position: "29", front: "YARD", back: "CHEST" },
+    { position: "30", front: "CONDUCTOR", back: "DOG" },
+    { position: "31", front: "GIANT", back: "NAIL" },
+    { position: "32", front: "FACE", back: "BERLIN" },
+    { position: "33", front: "PIRATE", back: "HORSE" },
+    { position: "34", front: "BEACH", back: "CHARGE" },
+    { position: "35", front: "POUND", back: "SUB" },
+    { position: "36", front: "ROUND", back: "INDIA" },
+    { position: "37", front: "FIELD", back: "TRAIN" },
+    { position: "38", front: "CYCLE", back: "TELESCOPE" },
+    { position: "39", front: "ROME", back: "PLANE" },
+    { position: "40", front: "HOTEL", back: "PARACHUTE" },
+    { position: "41", front: "SPOT", back: "PIANO" },
+    { position: "42", front: "MOUNT", back: "BOX" },
+    { position: "43", front: "STICK", back: "PLATYPUS" },
+    { position: "44", front: "SINK", back: "CLUB" },
+    { position: "45", front: "MOLE", back: "SHOE" },
+    { position: "46", front: "SCHOOL", back: "SERVER" },
+    { position: "47", front: "CHICK", back: "CENTER" },
+    { position: "48", front: "WATER", back: "CHAIR" },
+    { position: "49", front: "PAPER", back: "SOUND" },
+    { position: "50", front: "SLUG", back: "COMPOUND" },
+    { position: "51", front: "BUTTON", back: "FILM" },
+    { position: "52", front: "HIMALAYAS", back: "CROWN" },
+    { position: "53", front: "NINJA", back: "OLYMPUS" },
+    { position: "54", front: "CZECH", back: "BACK" },
+    { position: "55", front: "GROUND", back: "NOTE" },
+    { position: "56", front: "BUGLE", back: "PART" },
+    { position: "57", front: "MOUTH", back: "TAP" },
+    { position: "58", front: "TAG", back: "ICE" },
+    { position: "59", front: "BUT", back: "SOCK" },
+    { position: "60", front: "WORM", back: "ALPS" },
+    { position: "61", front: "PENGUIN", back: "ROOT" },
+    { position: "62", front: "LAWYER", back: "SATELLITE" },
+    { position: "63", front: "SPIDER", back: "ANGEL" },
+    { position: "64", front: "TAIL", back: "CRASH" },
+    { position: "65", front: "TICK", back: "GOLD" },
+    { position: "66", front: "MINT", back: "BUG" },
+    { position: "67", front: "MISSILE", back: "PASTE" },
+    { position: "68", front: "EMBASSY", back: "ROBOT" },
+    { position: "69", front: "PISTOL", back: "ROW" },
+    { position: "70", front: "SCIENTIST", back: "SPIKE" },
+    { position: "71", front: "KIWI", back: "CODE" },
+    { position: "72", front: "LOG", back: "LOCH NESS" },
+    { position: "73", front: "GERMANY", back: "FORK" },
+    { position: "74", front: "HAND", back: "SWING" },
+    { position: "75", front: "DISEASE", back: "PORT" },
+    { position: "76", front: "BED", back: "CIRCLE" },
+    { position: "77", front: "SPY", back: "UNICORN" },
+    { position: "78", front: "PRINCESS", back: "TIME" },
+    { position: "79", front: "DANCE", back: "LINK" },
+    { position: "80", front: "CARROT", back: "FLUTE" },
+    { position: "81", front: "STATE", back: "TORCH" },
+    { position: "82", front: "RACKET", back: "BEIJING" },
+    { position: "83", front: "GENIUS", back: "EAGLE" },
+    { position: "84", front: "THIEF", back: "BARK" },
+    { position: "85", front: "TRUNK", back: "SNOW" },
+    { position: "86", front: "AMERICA", back: "IVORY" },
+    { position: "87", front: "NOVEL", back: "PIPE" },
+    { position: "88", front: "WALL", back: "PANTS" },
+    { position: "89", front: "BERRY", back: "SOLDIER" },
+    { position: "90", front: "ATLANTIS", back: "VACUUM" },
+    { position: "91", front: "KETCHUP", back: "WITCH" },
+    { position: "92", front: "PLOT", back: "PUPIL" },
+    { position: "93", front: "ENGLAND", back: "SMUGGLER" },
+    { position: "94", front: "TEMPLE", back: "ORANGE" },
+    { position: "95", front: "MAPLE", back: "AZTEC" },
+    { position: "96", front: "MAIL", back: "UNDERTAKER" },
+    { position: "97", front: "AFRICA", back: "SCUBA DIVER" },
+    { position: "98", front: "OPERA", back: "PYRAMID" },
+    { position: "99", front: "TOWER", back: "POISON" },
+    { position: "100", front: "NIGHT", back: "STRING" }
+  ].map(card => ({
+    ...card,
+    deck: "Deck 2"
+  }));
+
+
+  /*
+   * Combine both decks.
+   */
+
+  const cards = [...deck1, ...deck2];
+
+
+  /*
+   * ============================================
+   * SEARCH
+   * ============================================
+   */
+
+  const searchInput = document.getElementById("searchInput");
+  const resultsContainer = document.getElementById("results");
+  const resultCount = document.getElementById("resultCount");
+
+
+  function searchCards() {
+
+    const query = searchInput.value.trim().toLowerCase();
+
+    /*
+     * Nothing entered yet.
+     */
+
+    if (query === "") {
+
+      resultsContainer.innerHTML = `
+          <div class="no-results">
+            Start typing to search the cards.
+          </div>
+        `;
+
+      resultCount.textContent = "";
+
+      return;
+    }
+
+
+    /*
+     * Search:
+     *
+     * - Front of Card
+     * - Back of Card
+     * - Deck
+     * - Position
+     */
+
+    const matches = cards.filter(card => {
+
+      return (
+        card.front.toLowerCase().includes(query) ||
+        card.back.toLowerCase().includes(query) ||
+        card.deck.toLowerCase().includes(query) ||
+        card.position.toLowerCase().includes(query)
+      );
+
+    });
+
+
+    resultCount.textContent =
+      `${matches.length} ${matches.length === 1 ? "result" : "results"}`;
+
+
+    /*
+     * No matches.
+     */
+
+    if (matches.length === 0) {
+
+      resultsContainer.innerHTML = `
+          <div class="no-results">
+            No cards found.
+          </div>
+        `;
+
+      return;
+    }
+
+
+    /*
+     * Display each match as:
+     *
+     * FRONT OF CARD | BACK OF CARD
+     * ----------------------------
+     * DECK          | POSITION
+     */
+
+    resultsContainer.innerHTML = matches.map(card => `
+
+        <div class="result-card">
+
+          <div class="card-cell front">
+            <span class="label">Front of Card</span>
+            <span class="value">
+              ${escapeHtml(card.front)}
+            </span>
+          </div>
+
+          <div class="card-cell back">
+            <span class="label">Back of Card</span>
+            <span class="value">
+              ${escapeHtml(card.back)}
+            </span>
+          </div>
+
+          <div class="card-cell deck">
+            <span class="label">Deck</span>
+            <span class="value ${card.deck === "Deck 1" ? "deck-1" : "deck-2"}">
+              ${escapeHtml(card.deck)}
+            </span>
+          </div>
+
+          <div class="card-cell position">
+            <span class="label">Position</span>
+            <span class="value">
+              ${escapeHtml(card.position)}
+            </span>
+          </div>
+
+        </div>
+
+      `).join("");
+
+  }
+
+
+  /*
+   * ============================================
+   * HTML ESCAPING
+   * ============================================
+   */
+
+  function escapeHtml(value) {
+
+    return value
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  /*
+   * Search as the user types.
+   */
+
+  searchInput.addEventListener("input", searchCards);
+
+
+  /*
+   * Initial page state.
+   */
+
+  searchCards();
+
+</script>
+
+</body>
+</html>

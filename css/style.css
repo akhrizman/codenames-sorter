@@ -1,0 +1,164 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 16px;
+  background: #f4f4f4;
+  color: #222;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1 {
+  margin: 0 0 18px;
+  text-align: center;
+  font-size: 28px;
+}
+
+.search-box {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  font-size: 18px;
+  outline: none;
+  background: white;
+}
+
+#searchInput:focus {
+  border-color: #333;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
+}
+
+#resultCount {
+  margin-bottom: 10px;
+  color: #666;
+  font-size: 14px;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/*
+ * Each search result is a 2x2 card:
+ *
+ * FRONT OF CARD | BACK OF CARD
+ * ----------------------------
+ * DECK          | POSITION
+ */
+.result-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr auto;
+
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.card-cell {
+  padding: 14px;
+  min-width: 0;
+}
+
+.front {
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.back {
+  border-bottom: 1px solid #ddd;
+}
+
+.deck {
+  border-right: 1px solid #ddd;
+}
+
+.label {
+  display: block;
+  margin-bottom: 6px;
+
+  color: #777;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.value {
+  display: block;
+  font-size: 19px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.deck-1 {
+  color: #1d4ed8;
+}
+
+.deck-2 {
+  color: #b91c1c;
+}
+
+.no-results {
+  padding: 30px 15px;
+  text-align: center;
+  color: #777;
+  background: white;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.instructions {
+  margin-top: 18px;
+  text-align: center;
+  color: #777;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+@media (max-width: 500px) {
+  body {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 14px;
+  }
+
+  #searchInput {
+    font-size: 16px;
+    padding: 13px;
+  }
+
+  .card-cell {
+    padding: 12px;
+  }
+
+  .value {
+    font-size: 17px;
+  }
+
+  .label {
+    font-size: 10px;
+  }
+}
