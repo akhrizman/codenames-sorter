@@ -325,4 +325,10 @@ function escapeHtml(value) {
 
 searchInput.addEventListener("input", searchCards);
 
+searchInput.addEventListener("focus", () => {
+  searchInput.value = "";
+  resultsContainer.innerHTML = "";
+  resultCount.textContent = "";
+});
+
 searchCards();
